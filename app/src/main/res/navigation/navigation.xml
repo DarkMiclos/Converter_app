@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/currencyConverter">
+
+    <fragment
+        android:id="@+id/currencyConverter"
+        android:name="com.example.converterapp.CurrencyConverter"
+        android:label="fragment_currency_converter"
+        tools:layout="@layout/fragment_currency_converter" />
+    <fragment
+        android:id="@+id/lengthConverter"
+        android:name="com.example.converterapp.LengthConverter"
+        android:label="fragment_length_converter"
+        tools:layout="@layout/fragment_length_converter" />
+</navigation>

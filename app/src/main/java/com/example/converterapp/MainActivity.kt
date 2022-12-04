@@ -18,6 +18,7 @@ import com.example.converterapp.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var drawerLayout: DrawerLayout
 
@@ -25,16 +26,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.navigationView)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawerLayout.addDrawerListener(toggle)
+        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        navView.setNavigationItemSelectedListener {
+        setContentView(binding.root)
+
+        binding.navigationView.setNavigationItemSelectedListener {
             it.isChecked = true
 
             when(it.itemId) {
@@ -48,9 +50,9 @@ class MainActivity : AppCompatActivity() {
     private fun replaceFragment(fragment: Fragment, title: String) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainerView, fragment)
+        fragmentTransaction.replace(binding.fragmentContainerView.id, fragment)
         fragmentTransaction.commit()
-        drawerLayout.closeDrawers()
+        binding.drawerLayout.closeDrawers()
         setTitle(title)
     }
 

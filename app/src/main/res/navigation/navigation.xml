@@ -15,4 +15,9 @@
         android:name="com.example.converterapp.LengthConverter"
         android:label="fragment_length_converter"
         tools:layout="@layout/fragment_length_converter" />
+    <fragment
+        android:id="@+id/supportedCurrencies"
+        android:name="com.example.converterapp.SupportedCurrencies"
+        android:label="fragment_supported_currencies"
+        tools:layout="@layout/fragment_supported_currencies" />
 </navigation>

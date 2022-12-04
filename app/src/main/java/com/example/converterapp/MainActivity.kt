@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -42,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId) {
                 R.id.nav_currency_converter -> replaceFragment(CurrencyConverter(), it.title.toString())
                 R.id.nav_length_converter -> replaceFragment(LengthConverter(), it.title.toString())
+                R.id.nav_supported_currencies -> replaceFragment(SupportedCurrencies(), it.title.toString())
             }
             true
         }

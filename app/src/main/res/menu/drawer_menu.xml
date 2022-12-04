@@ -7,5 +7,8 @@
         <item
             android:id="@+id/nav_length_converter"
             android:title="@string/length_converter" />
+        <item
+            android:id="@+id/nav_supported_currencies"
+            android:title="@string/supported_currencies" />
     </group>
 </menu>

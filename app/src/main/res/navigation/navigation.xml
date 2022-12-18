@@ -20,4 +20,9 @@
         android:name="com.example.converterapp.SupportedCurrencies"
         android:label="fragment_supported_currencies"
         tools:layout="@layout/fragment_supported_currencies" />
+    <fragment
+        android:id="@+id/loginRegister"
+        android:name="com.example.converterapp.LoginRegister"
+        android:label="LoginRegister"
+        tools:layout="@layout/fragment_login_register" />
 </navigation>

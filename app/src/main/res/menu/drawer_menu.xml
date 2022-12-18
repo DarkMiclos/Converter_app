@@ -10,5 +10,9 @@
         <item
             android:id="@+id/nav_supported_currencies"
             android:title="@string/supported_currencies" />
+
+        <item
+            android:id="@+id/nav_login_register"
+            android:title="@string/login_register" />
     </group>
 </menu>

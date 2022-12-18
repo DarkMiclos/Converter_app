@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_currency_converter -> replaceFragment(CurrencyConverter(), it.title.toString())
                 R.id.nav_length_converter -> replaceFragment(LengthConverter(), it.title.toString())
                 R.id.nav_supported_currencies -> replaceFragment(SupportedCurrencies(), it.title.toString())
+                R.id.nav_login_register -> replaceFragment(LoginRegister(), it.title.toString())
             }
             true
         }

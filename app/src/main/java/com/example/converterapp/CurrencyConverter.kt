@@ -13,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
 import com.example.converterapp.databinding.FragmentCurrencyConverterBinding
 import com.example.converterapp.databinding.FragmentSupportedCurrenciesBinding
 import kotlinx.coroutines.Dispatchers
@@ -54,6 +55,8 @@ class CurrencyConverter : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
 
         spinnerSetup()
         textChanged()

@@ -16,6 +16,12 @@ android {
         versionCode 1
         versionName "1.0"
 
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/app/src/main/java/")
+            }
+        }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

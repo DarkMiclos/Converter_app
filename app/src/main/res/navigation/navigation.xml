@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/currencyConverter">
+    app:startDestination="@id/loginRegister">
 
     <fragment
         android:id="@+id/currencyConverter"
@@ -24,5 +24,20 @@
         android:id="@+id/loginRegister"
         android:name="com.example.converterapp.LoginRegister"
         android:label="LoginRegister"
-        tools:layout="@layout/fragment_login_register" />
+        tools:layout="@layout/fragment_login_register" >
+        <action
+            android:id="@+id/action_loginRegister_to_currencyConverter2"
+            app:destination="@id/currencyConverter"
+            app:launchSingleTop="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/logout"
+        android:name="com.example.converterapp.LoginRegister"
+        android:label="Logout"
+        tools:layout="@layout/fragment_login_register" >
+        <action
+            android:id="@+id/action_logout_to_currencyConverter"
+            app:destination="@id/currencyConverter" />
+    </fragment>
 </navigation>

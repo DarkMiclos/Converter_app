@@ -12,7 +12,7 @@
             android:title="@string/supported_currencies" />
 
         <item
-            android:id="@+id/nav_login_register"
-            android:title="@string/login_register" />
+            android:id="@+id/nav_logout"
+            android:title="@string/logout" />
     </group>
 </menu>

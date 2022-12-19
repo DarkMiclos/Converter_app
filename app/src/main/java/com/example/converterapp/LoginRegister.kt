@@ -2,16 +2,23 @@ package com.example.converterapp
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.invalidateOptionsMenu
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.converterapp.databinding.FragmentLoginRegisterBinding
-import com.example.converterapp.databinding.FragmentSupportedCurrenciesBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +34,8 @@ class LoginRegister : Fragment() {
     private var _binding: FragmentLoginRegisterBinding? = null
     private val binding get() = _binding!!
     private lateinit var appDatabase: AppDatabase
+    private lateinit var viewModel: UserViewModel
+    private lateinit var myMenu: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +53,10 @@ class LoginRegister : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val navController = findNavController()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+
+        viewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
         appDatabase = AppDatabase.getDatabase(binding.root.context)
 
         binding.signup.setOnClickListener {
@@ -52,21 +65,24 @@ class LoginRegister : Fragment() {
 
         binding.login.setOnClickListener {
             readData()
+            navController.navigate(R.id.action_loginRegister_to_currencyConverter2)
         }
     }
 
     private fun writeData() {
-        var userName = binding.username.text.toString()
+        var firstName = binding.firstName.text.toString()
+        var secondName = binding.secondName.text.toString()
         var password = binding.password.text.toString()
 
-        if(userName.isNotEmpty() && password.isNotEmpty()) {
+        if(firstName.isNotEmpty() && secondName.isNotEmpty() && password.isNotEmpty()) {
             val user = User(
-                null, userName, password)
+                null, firstName, secondName, password)
             GlobalScope.launch(Dispatchers.IO) {
                 appDatabase.userDao().insert(user)
             }
 
-            binding.username.text.clear()
+            binding.firstName.text.clear()
+            binding.secondName.text.clear()
             binding.password.text.clear()
 
             Toast.makeText(context, "Successful sign up!", Toast.LENGTH_SHORT).show()
@@ -76,20 +92,34 @@ class LoginRegister : Fragment() {
     }
 
     private fun readData() {
-        val userName = binding.username.text.toString()
+        val firstName = binding.firstName.text.toString()
+        val secondName = binding.secondName.text.toString()
         val password = binding.password.text.toString()
 
-        if(userName.isNotEmpty() && password.isNotEmpty()) {
+        if(firstName.isNotEmpty() && secondName.isNotEmpty() && password.isNotEmpty()) {
             lateinit var user: User
             GlobalScope.launch {
-                user = appDatabase.userDao().findByUserName(userName)
+                user = appDatabase.userDao().findByFirstAndSecondName(firstName, secondName)
 
                 if(user.password == password) {
+                    withContext(Dispatchers.Main) {
+                        viewModel.setLoggedIn(true)
+                        viewModel.setUser(user)
+                        Log.d("login", viewModel.isLoggedIn.toString())
+                    }
                     Log.d("Login", "Successful login!")
                 } else {
                     Log.d("Login", "Password is incorrect!")
                 }
             }
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment, title: String) {
+        val fragmentManager = fragment.parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainerView, fragment)
+        fragmentTransaction.commit()
+        activity?.title = title
     }
 }

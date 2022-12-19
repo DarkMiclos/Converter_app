@@ -39,7 +39,7 @@
     <string name="supported_currencies">Supported Currencies</string>
     <string name="currencies">Currencies</string>
     <!-- Strings related to login -->
-    <string name="prompt_username">Username</string>
+    <string name="first_name">First name</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -49,4 +49,6 @@
     <string name="login_failed">"Login failed"</string>
     <string name="login_register">Login/Register</string>
     <string name="sign_up">Sign Up</string>
+    <string name="second_name">Second name</string>
+    <string name="logout">Logout</string>
 </resources>

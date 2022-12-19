@@ -93,7 +93,7 @@ class SupportedCurrencies : Fragment(), CurrencyAdapter.OnItemClickListener {
         if(text != null) {
             val filteredList: ArrayList<Currency> = ArrayList<Currency>()
             for (i in currencyList) {
-                if (i.name.lowercase(Locale.getDefault()).contains(text)) {
+                if (i.name.lowercase(Locale.getDefault()).contains(text.lowercase())) {
                     filteredList.add(i)
                 }
             }

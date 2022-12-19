@@ -10,6 +10,9 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.ListFragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -87,6 +90,8 @@ class SupportedCurrencies : Fragment(), CurrencyAdapter.OnItemClickListener {
     override fun onItemClick(position: Int) {
         val clickedItem = currencyList[position]
         Log.d("clicked", clickedItem.toString())
+        var action = SupportedCurrenciesDirections.actionSupportedCurrenciesToSupportedCurrenciesDetails2(clickedItem.name)
+        findNavController().navigate(action)
     }
 
     private fun filterList(text: String?) {

@@ -19,7 +19,11 @@
         android:id="@+id/supportedCurrencies"
         android:name="com.example.converterapp.SupportedCurrencies"
         android:label="fragment_supported_currencies"
-        tools:layout="@layout/fragment_supported_currencies" />
+        tools:layout="@layout/fragment_supported_currencies" >
+        <action
+            android:id="@+id/action_supportedCurrencies_to_supportedCurrenciesDetails2"
+            app:destination="@id/supportedCurrenciesDetails" />
+    </fragment>
     <fragment
         android:id="@+id/loginRegister"
         android:name="com.example.converterapp.LoginRegister"
@@ -30,14 +34,17 @@
             app:destination="@id/currencyConverter"
             app:launchSingleTop="true"/>
     </fragment>
-
     <fragment
-        android:id="@+id/logout"
-        android:name="com.example.converterapp.LoginRegister"
-        android:label="Logout"
-        tools:layout="@layout/fragment_login_register" >
+        android:id="@+id/supportedCurrenciesDetails"
+        android:name="com.example.converterapp.SupportedCurrencyDetailFragment"
+        android:label="fragment_supported_currencies_detail"
+        tools:layout="@layout/fragment_supported_currency_detail" >
+        <argument
+            android:name="currencyName"
+            app:argType="string" />
         <action
-            android:id="@+id/action_logout_to_currencyConverter"
-            app:destination="@id/currencyConverter" />
+            android:id="@+id/action_supportedCurrenciesDetails_to_supportedCurrencies"
+            app:destination="@id/supportedCurrencies" />
     </fragment>
+
 </navigation>
